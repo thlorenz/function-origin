@@ -1,18 +1,24 @@
-var binding = require('bindings')('function_origin');
+var binding = require('bindings')('function_origin')
 
-function FunctionOrigin(fn) {
-  if (!(this instanceof FunctionOrigin))
-    return new FunctionOrigin(fn);
+const util = require('util')
+const print = obj => process._rawDebug(util.inspect(obj, true, 15, true))
 
-  if (typeof fn !== 'function')
-    throw new TypeError('Argument is not a function');
+module.exports = function functionOrigin(fn) {
+  if (typeof fn !== 'function') {
+    throw new TypeError('Argument is not a function')
+  }
 
-  this.file = null;
-  this.line = null;
-  this.column = null;
-  this.inferredName = null;
+  const functionInfo = {}
 
-  binding.SetOrigin(fn, this);
+  binding.GetFunctionInfo(fn, onfunctionInfo)
+
+  // called synchronously
+  function onfunctionInfo(file, line, column, inferredName) {
+    print({ file, line, column, inferredName })
+    functionInfo.file = file
+    functionInfo.line = line
+    functionInfo.column = column
+    functionInfo.inferredName = inferredName
+  }
+  return functionInfo
 }
-
-module.exports = FunctionOrigin;
