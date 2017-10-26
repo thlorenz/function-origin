@@ -7,7 +7,7 @@
     "test": "node test/runner.js"
   },
   "author": "Vladimir Kurchatkin <vladimir.kurchatkin@gmail.com>",
-  "repository": "vkurchatkin/function-origin",
+  "repository": "thlorenz/function-origin",
   "license": "MIT",
   "dependencies": {
     "bindings": "^1.2.1",
