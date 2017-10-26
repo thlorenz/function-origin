@@ -1,5 +1,10 @@
 # function-origin
 
+_NOTE_:
+
+This is a version that fixes the bound function problem. Use it until the [corresponding
+PR](https://github.com/vkurchatkin/function-origin/pull/8) is merged.
+
 Get origin of a function in io.js and node.js
 
 # Usage
