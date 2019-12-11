@@ -10,7 +10,7 @@ export type OriginInfo = {
 export function isNativeV8Function(fn: Function) {
   return (
     !fn.name.startsWith('bound') &&
-    /function [a-z0-9]*\(\) \{ \[native code] }/i.test(fn.toString())
+    /function [a-z0-9]*\(\) { \[native code] }/i.test(fn.toString())
   )
 }
 

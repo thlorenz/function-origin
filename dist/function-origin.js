@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const setOrigin = require('bindings')('function_origin');
 function isNativeV8Function(fn) {
     return (!fn.name.startsWith('bound') &&
-        /function [a-z0-9]*\(\) \{ \[native code] }/i.test(fn.toString()));
+        /function [a-z0-9]*\(\) { \[native code] }/i.test(fn.toString()));
 }
 exports.isNativeV8Function = isNativeV8Function;
 function functionOrigin(fn, safe = true) {

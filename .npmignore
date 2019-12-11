@@ -4,3 +4,4 @@ test/
 ts/
 tsconfig.json
 .prettierrc
+.idea/
