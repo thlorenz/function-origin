@@ -1,23 +1,27 @@
-# function-origin
+# @thlorenz/function-origin [![](https://github.com/thlorenz/function-origin/workflows/Node%20CI/badge.svg?branch=master)](https://github.com/thlorenz/function-origin/actions)
+
+Get origin of a function in Node.js
 
 _NOTE_:
 
-This is a version that fixes the bound function problem. Use it until the [corresponding
-PR](https://github.com/vkurchatkin/function-origin/pull/8) is merged.
+This is a version that fixes the bound function problem and works with latest Node.js versions.
 
-Get origin of a function in io.js and node.js
+The original module seems to be no longer maintained, i.e. this [PR fixing bound function
+issues](https://github.com/vkurchatkin/function-origin/pull/8) hasn't been merged for years.
 
-# Usage
+
+## Installation
 
 ```
-npm install function-origin
+npm install @thlorenz/function-origin
 ```
 
-and then:
+## Usage
 
-```javascript
-var FunctionOrigin = require('function-origin');
-var origin = FunctionOrigin(someFn);
+
+```js
+var FunctionOrigin = require('@thlorenz/function-origin');
+var origin = new FunctionOrigin(someFn);
 ```
 `origin` has the following properties:
 
