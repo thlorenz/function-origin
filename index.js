@@ -1,18 +1,18 @@
-var binding = require('bindings')('function_origin');
+'use strict'
 
-function FunctionOrigin(fn) {
-  if (!(this instanceof FunctionOrigin))
-    return new FunctionOrigin(fn);
+var setOrigin = require('bindings')('function_origin')
 
-  if (typeof fn !== 'function')
-    throw new TypeError('Argument is not a function');
+function FunctionOrigin (fn) {
+  if (!(this instanceof FunctionOrigin)) return new FunctionOrigin(fn)
 
-  this.file = null;
-  this.line = null;
-  this.column = null;
-  this.inferredName = null;
+  if (typeof fn !== 'function') throw new TypeError('Argument is not a function')
 
-  binding.SetOrigin(fn, this);
+  this.file = null
+  this.line = null
+  this.column = null
+  this.inferredName = null
+
+  setOrigin(fn, this)
 }
 
-module.exports = FunctionOrigin;
+module.exports = FunctionOrigin

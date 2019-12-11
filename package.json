@@ -4,13 +4,22 @@
   "description": "Get origin of a function",
   "main": "index.js",
   "scripts": {
-    "test": "node test/runner.js"
+    "xcode": "node-gyp configure -- -f xcode",
+    "rebuild+test": "node-gyp rebuild && npm run test:run",
+    "test": "npm run test:8 && npm run test:10 && npm run test:12",
+    "test:run": "node test/function-origin.js",
+    "test:8": "nave use 8 npm run rebuild+test",
+    "test:10": "nave use 10 npm run rebuild+test",
+    "test:12": "nave use 12 npm run rebuild+test"
   },
   "author": "Vladimir Kurchatkin <vladimir.kurchatkin@gmail.com>",
   "repository": "thlorenz/function-origin",
   "license": "MIT",
   "dependencies": {
-    "bindings": "^1.2.1",
-    "nan": "^2.0.5"
+    "bindings": "^1.2.1"
+  },
+  "devDependencies": {
+    "nave": "^3.2.1",
+    "tape": "^4.11.0"
   }
 }

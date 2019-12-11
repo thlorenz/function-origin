@@ -2,12 +2,9 @@
   "targets": [
     {
       "target_name": "function_origin",
-      "include_dirs" : [
-        "<!(node -e \"require('nan')\")"
-      ],
-      "sources": [
-        "src/function_origin.cc"
-      ]
+      "cflags!": [ "-fno-exceptions" ],
+      "cflags_cc!": [ "-fno-exceptions" ],
+      "sources": [ "src/function_origin.cc" ]
     }
   ]
 }

@@ -1,9 +1,21 @@
 #include <node.h>
-#include <nan.h>
 
-using namespace v8;
+using v8::Context;
+using v8::FunctionCallbackInfo;
+using v8::Function;
+using v8::Integer;
+using v8::Isolate;
+using v8::Local;
+using v8::NewStringType;
+using v8::Object;
+using v8::ScriptOrigin;
+using v8::String;
+using v8::Value;
 
-NAN_METHOD(SetOrigin) {
+void SetOrigin(const FunctionCallbackInfo<Value>& info) {
+  Isolate* isolate = info.GetIsolate();
+  Local<Context> context = isolate->GetCurrentContext();
+
   Local<Function> fn = info[0].As<Function>();
   Local<Object> target = info[1].As<Object>();
 
@@ -23,20 +35,31 @@ NAN_METHOD(SetOrigin) {
   }
 
   ScriptOrigin origin = fn->GetScriptOrigin();
-  target->Set(Nan::New<String>("file").ToLocalChecked(), origin.ResourceName());
 
-  target->Set(Nan::New<String>("line").ToLocalChecked(),
-    Nan::New<Integer>(fn->GetScriptLineNumber()));
-
-  target->Set(Nan::New<String>("column").ToLocalChecked(),
-    Nan::New<Integer>(fn->GetScriptColumnNumber()));
-
-  target->Set(Nan::New<String>("inferredName").ToLocalChecked(), fn->GetInferredName());
+  target->Set(
+    context,
+    String::NewFromUtf8(isolate, "file", NewStringType::kNormal).ToLocalChecked(),
+    origin.ResourceName()
+  ).FromJust();
+  target->Set(
+    context,
+    String::NewFromUtf8(isolate, "line", NewStringType::kNormal).ToLocalChecked(),
+    Integer::New(isolate, fn->GetScriptLineNumber())
+  ).FromJust();
+  target->Set(
+    context,
+    String::NewFromUtf8(isolate, "column", NewStringType::kNormal).ToLocalChecked(),
+    Integer::New(isolate, fn->GetScriptColumnNumber())
+  ).FromJust();
+  target->Set(
+    context,
+    String::NewFromUtf8(isolate, "inferredName", NewStringType::kNormal).ToLocalChecked(),
+    fn->GetInferredName()
+  ).FromJust();
 }
 
-static void Init(Handle<Object> exports) {
-  exports->Set(Nan::New<String>("SetOrigin").ToLocalChecked(),
-    Nan::New<FunctionTemplate>(SetOrigin)->GetFunction());
+static void Init(Local<Object> exports, Local<Object> module) {
+  NODE_SET_METHOD(module, "exports", SetOrigin);
 }
 
 NODE_MODULE(function_origin, Init)
