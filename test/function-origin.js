@@ -51,6 +51,20 @@ test('\nOrigin of native functions', function(t) {
     /is a native function/,
     'setOrigin binding'
   )
+  /* TODO: this still segfaults and might not be detectable as
+      bound user functions and bound natives have the exact same body
+  t.throws(
+    () => functionOrigin(Math.abs.bind(this)),
+    /is a native function/,
+    'Math.abs.bind(this)'
+  )
+
+  t.throws(
+    () => functionOrigin(Math.abs.bind(this, 1)),
+    /is a native function/,
+    'Math.abs.bind(this, 1)'
+  )
+   */
 
   t.end()
 })

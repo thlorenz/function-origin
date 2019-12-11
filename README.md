@@ -10,6 +10,12 @@ The original module seems to be no longer maintained, i.e. this [PR fixing bound
 issues](https://github.com/vkurchatkin/function-origin/pull/8) hasn't been merged for years.
 
 
+_WARNING_:
+
+Passing a bound native function, like `Math.abs.bind(this)` will segfault the process.
+
+This maybe a bug in V8 but at this point no workaround is known.
+
 ## Installation
 
 ```
