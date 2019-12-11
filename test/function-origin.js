@@ -7,6 +7,8 @@ const { functionOrigin } = require('../dist/function-origin.js')
 const fixturesPath = path.join(__dirname, 'fixtures.js')
 const fixtures = require('./fixtures.js')
 
+const setOrigin = require('bindings')('function_origin')
+
 test('\nOrigin of fixtures.TestFn', function(t) {
   const info = functionOrigin(fixtures.TestFn)
 
@@ -38,6 +40,17 @@ test('\nOrigin of boundFunction', function(t) {
   t.equal(info.line, 2, 'line')
   t.equal(info.column, 15, 'colunn')
   t.equal(info.inferredName, '', 'inferredName')
+
+  t.end()
+})
+
+test('\nOrigin of native functions', function(t) {
+  t.throws(() => functionOrigin(Math.abs), /is a native function/, 'Math.abs')
+  t.throws(
+    () => functionOrigin(setOrigin),
+    /is a native function/,
+    'setOrigin binding'
+  )
 
   t.end()
 })

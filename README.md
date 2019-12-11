@@ -18,17 +18,29 @@ npm install @thlorenz/function-origin
 
 ## Usage
 
-
 ```js
-var FunctionOrigin = require('@thlorenz/function-origin');
-var origin = new FunctionOrigin(someFn);
+const functionOrigin = require('@thlorenz/function-origin')
+const origin = functionOrigin(someFn)
 ```
+
 `origin` has the following properties:
 
  - `file` — source file name;
  - `line` — line number (0-based);
  - `column` — column number (0-based);
  - `inferredName`.
+
+## Performance over Safety
+
+By default function-origin checks that the passed function is not a native function like
+`Math.abs` and throws an error if so.
+Without that check trying to find a the origin of a native function results in a segmentation
+fault and crashes the entire app. To diable the check adapt the above examnple to the below.
+
+```js
+const functionOrigin = require('@thlorenz/function-origin')
+const origin = functionOrigin(someFn, false)
+```
 
 # License
 
