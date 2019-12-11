@@ -2,13 +2,13 @@
 
 const test = require('tape')
 const path = require('path')
-const FunctionOrigin = require('../index.js')
+const { functionOrigin } = require('../dist/function-origin.js')
 
 const fixturesPath = path.join(__dirname, 'fixtures.js')
 const fixtures = require('./fixtures.js')
 
-test('\nOrigin of fixtures.TestFn', function (t) {
-  const info = new FunctionOrigin(fixtures.TestFn)
+test('\nOrigin of fixtures.TestFn', function(t) {
+  const info = functionOrigin(fixtures.TestFn)
 
   t.equal(info.file, fixturesPath, 'file')
   t.equal(info.line, 2, 'line')
@@ -19,8 +19,8 @@ test('\nOrigin of fixtures.TestFn', function (t) {
   t.end()
 })
 
-test('\nOrigin of fixtures.assignedFn', function (t) {
-  const info = FunctionOrigin(fixtures.assignedFn)
+test('\nOrigin of fixtures.assignedFn', function(t) {
+  const info = functionOrigin(fixtures.assignedFn)
 
   t.equal(info.file, fixturesPath, 'file')
   t.equal(info.line, 5, 'line')
@@ -30,9 +30,9 @@ test('\nOrigin of fixtures.assignedFn', function (t) {
   t.end()
 })
 
-test('\nOrigin of boundFunction', function (t) {
+test('\nOrigin of boundFunction', function(t) {
   const boundFunction = fixtures.TestFn.bind({})
-  const info = FunctionOrigin(boundFunction)
+  const info = functionOrigin(boundFunction)
 
   t.equal(info.file, fixturesPath, 'file')
   t.equal(info.line, 2, 'line')

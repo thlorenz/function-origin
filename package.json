@@ -2,11 +2,15 @@
   "name": "@thlorenz/function-origin",
   "version": "2.0.1",
   "description": "Get origin of a function",
-  "main": "index.js",
+  "main": "dist/function-origin.js",
+  "types": "dist/function-origin.d.ts",
   "scripts": {
     "xcode": "node-gyp configure -- -f xcode",
+    "lint": "prettier -c ./ts/* ./test/function-origin.js",
+    "tsc": "tsc -b",
     "rebuild+test": "node-gyp rebuild && npm run test:run",
-    "test": "npm run test:8 && npm run test:10 && npm run test:12",
+    "pretest": "npm run tsc",
+    "test": "npm run lint && npm run test:8 && npm run test:10 && npm run test:12",
     "test:run": "node test/function-origin.js",
     "test:8": "nave use 8 npm run rebuild+test",
     "test:10": "nave use 10 npm run rebuild+test",
@@ -22,7 +26,10 @@
     "bindings": "^1.2.1"
   },
   "devDependencies": {
+    "@types/node": "^12.12.17",
     "nave": "^3.2.1",
-    "tape": "^4.11.0"
+    "prettier": "^1.19.1",
+    "tape": "^4.11.0",
+    "typescript": "^3.7.3"
   }
 }

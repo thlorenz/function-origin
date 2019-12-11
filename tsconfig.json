@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "rootDir": "ts",
+    "outDir": "dist",
+    "target": "ES2018",
+    "module": "commonjs",
+    "allowJs": false,
+    "checkJs": false,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "noEmit": false,
+    "emitDeclarationOnly": false,
+    "importHelpers": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noFallthroughCasesInSwitch": true,
+    "types": [
+      "node"
+    ],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  },
+  "references": [
+  ]
+}
