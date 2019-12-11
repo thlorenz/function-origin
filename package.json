@@ -13,6 +13,9 @@
     "test:12": "nave use 12 npm run rebuild+test"
   },
   "author": "Vladimir Kurchatkin <vladimir.kurchatkin@gmail.com>",
+  "contributors": [
+    "Thorsten Lorenz <thlorenz@gmx.de>"
+  ],
   "repository": "thlorenz/function-origin",
   "license": "MIT",
   "dependencies": {
