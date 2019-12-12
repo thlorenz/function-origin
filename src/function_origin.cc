@@ -36,26 +36,24 @@ void SetOrigin(const FunctionCallbackInfo<Value>& info) {
 
   ScriptOrigin origin = fn->GetScriptOrigin();
 
-  target->Set(
-    context,
-    String::NewFromUtf8(isolate, "file", NewStringType::kNormal).ToLocalChecked(),
-    origin.ResourceName()
-  ).FromJust();
-  target->Set(
-    context,
-    String::NewFromUtf8(isolate, "line", NewStringType::kNormal).ToLocalChecked(),
-    Integer::New(isolate, fn->GetScriptLineNumber())
-  ).FromJust();
-  target->Set(
-    context,
-    String::NewFromUtf8(isolate, "column", NewStringType::kNormal).ToLocalChecked(),
-    Integer::New(isolate, fn->GetScriptColumnNumber())
-  ).FromJust();
-  target->Set(
-    context,
-    String::NewFromUtf8(isolate, "inferredName", NewStringType::kNormal).ToLocalChecked(),
-    fn->GetInferredName()
-  ).FromJust();
+  Local<String> fileKey = String::NewFromUtf8(isolate, "file", NewStringType::kNormal).ToLocalChecked();
+  Local<String> lineKey = String::NewFromUtf8(isolate, "line", NewStringType::kNormal).ToLocalChecked();
+  Local<String> columnKey = String::NewFromUtf8(isolate, "column", NewStringType::kNormal).ToLocalChecked();
+  Local<String> inferredNameKey = String::NewFromUtf8(isolate, "inferredName", NewStringType::kNormal).ToLocalChecked();
+
+  Local<Value> resourceName = origin.ResourceName();
+  int lineNumber = fn->GetScriptLineNumber();
+  int columnNumber = fn->GetScriptColumnNumber();
+  Local<Value> inferredName = fn->GetInferredName();
+
+  if (!resourceName.IsEmpty()) {
+    target->Set(context, fileKey, resourceName).FromJust();
+  }
+  target->Set(context, lineKey, Integer::New(isolate, lineNumber)).FromJust();
+  target->Set(context, columnKey, Integer::New(isolate, columnNumber)).FromJust();
+  if (!inferredName.IsEmpty()) {
+    target->Set(context, inferredNameKey, inferredName).FromJust();
+  }
 }
 
 static void Init(Local<Object> exports, Local<Object> module) {

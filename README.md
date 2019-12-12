@@ -9,13 +9,6 @@ This is a version that fixes the bound function problem and works with latest No
 The original module seems to be no longer maintained, i.e. this [PR fixing bound function
 issues](https://github.com/vkurchatkin/function-origin/pull/8) hasn't been merged for years.
 
-
-_WARNING_:
-
-Passing a bound native function, like `Math.abs.bind(this)` will segfault the process.
-
-This maybe a bug in V8 but at this point no workaround is known.
-
 ## Installation
 
 ```
@@ -25,7 +18,7 @@ npm install @thlorenz/function-origin
 ## Usage
 
 ```js
-const functionOrigin = require('@thlorenz/function-origin')
+const { functionOrigin } = require('@thlorenz/function-origin')
 const origin = functionOrigin(someFn)
 ```
 
@@ -36,17 +29,17 @@ const origin = functionOrigin(someFn)
  - `column` — column number (0-based);
  - `inferredName`.
 
-## Performance over Safety
-
-By default function-origin checks that the passed function is not a native function like
-`Math.abs` and throws an error if so.
-Without that check trying to find a the origin of a native function results in a segmentation
-fault and crashes the entire app. To diable the check adapt the above examnple to the below.
+If a function's origin cannot be resolved (as is the case for native functions like
+`Math.abs`), an empty origin is returned which looks as follows:
 
 ```js
-const functionOrigin = require('@thlorenz/function-origin')
-const origin = functionOrigin(someFn, false)
+const { EMPTY_ORIGIN_INFO } = require('./')
+
+console.log(EMPTY_ORIGIN_INFO)
+// => { line: -1, column: -1, inferredName: '' }
 ```
+
+Note that in that case `typeof file === 'undefined'` which allows you to detect that case.
 
 # License
 
