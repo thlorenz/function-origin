@@ -50,7 +50,8 @@ test('\nOrigin of boundFunction', function(t) {
 // V8 regressed WRT info provided for native functions, at least for Node.js v6
 // it provides `{ file: 'native math.js', line: 12, column: 16, inferredName:
 // '' }` for `Math.abs`, while in later versions `file === undefined`.
-if (parseInt(process.versions.node.slice(0, 1) < 8)) {
+const major = parseInt(process.versions.node.slice(0, 3))
+if (major >= 8) {
   test('\nOrigin of native functions returns empty', function(t) {
     t.deepEqual(functionOrigin(Math.abs), EMPTY_ORIGIN_INFO, 'Math.abs')
     t.deepEqual(functionOrigin(setOrigin), EMPTY_ORIGIN_INFO, 'setOrigin')
