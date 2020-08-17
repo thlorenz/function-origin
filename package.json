@@ -11,11 +11,14 @@
     "rebuild+test": "node-gyp rebuild && npm run test:run",
     "build+test": "node-gyp build && npm run test:run",
     "pretest": "npm run tsc",
-    "test": "npm run lint && npm run test:8 && npm run test:10 && npm run test:12",
+    "test": "npm run lint && npm run test:10 && npm run test:12 && npm run test:14",
     "test:run": "node test/function-origin.js",
-    "test:8": "nave use 8 npm run rebuild+test",
     "test:10": "nave use 10 npm run rebuild+test",
-    "test:12": "nave use 12 npm run rebuild+test"
+    "test:12": "nave use 12 npm run rebuild+test",
+    "test:14": "nave use 14 npm run rebuild+test"
+  },
+  "engines": {
+    "node": ">= 10.0.0"
   },
   "author": "Vladimir Kurchatkin <vladimir.kurchatkin@gmail.com>",
   "contributors": [
