@@ -10,7 +10,7 @@ const {
 const fixturesPath = path.join(__dirname, 'fixtures.js')
 const fixtures = require('./fixtures.js')
 
-const setOrigin = require('bindings')('function_origin')
+const setOrigin = require('bindings')('function_origin').setOrigin
 
 test('\nOrigin of fixtures.TestFn', function(t) {
   const info = functionOrigin(fixtures.TestFn)

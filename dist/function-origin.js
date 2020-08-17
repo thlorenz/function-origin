@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const setOrigin = require('bindings')('function_origin');
+const setOrigin = require('bindings')('function_origin').setOrigin;
 exports.EMPTY_ORIGIN_INFO = {
     line: -1,
     column: -1,

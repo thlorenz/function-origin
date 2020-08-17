@@ -56,8 +56,6 @@ void SetOrigin(const FunctionCallbackInfo<Value>& info) {
   }
 }
 
-static void Init(Local<Object> exports, Local<Object> module) {
-  NODE_SET_METHOD(module, "exports", SetOrigin);
+NODE_MODULE_INIT() {
+  NODE_SET_METHOD(exports, "setOrigin", SetOrigin);
 }
-
-NODE_MODULE(function_origin, Init)

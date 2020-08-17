@@ -1,4 +1,4 @@
-const setOrigin = require('bindings')('function_origin')
+const setOrigin = require('bindings')('function_origin').setOrigin
 
 export const EMPTY_ORIGIN_INFO: OriginInfo = {
   line: -1,
