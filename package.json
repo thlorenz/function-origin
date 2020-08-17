@@ -9,6 +9,7 @@
     "lint": "prettier -c ./ts/* ./test/function-origin.js",
     "tsc": "tsc -b",
     "rebuild+test": "node-gyp rebuild && npm run test:run",
+    "build+test": "node-gyp build && npm run test:run",
     "pretest": "npm run tsc",
     "test": "npm run lint && npm run test:8 && npm run test:10 && npm run test:12",
     "test:run": "node test/function-origin.js",
