@@ -24,7 +24,7 @@
   "repository": "thlorenz/function-origin",
   "license": "MIT",
   "dependencies": {
-    "bindings": "^1.2.1"
+    "bindings": "^1.5.0"
   },
   "devDependencies": {
     "@types/node": "^12.12.17",
