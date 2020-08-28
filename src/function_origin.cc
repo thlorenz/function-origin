@@ -44,7 +44,8 @@ void SetOrigin(const FunctionCallbackInfo<Value>& info) {
   Local<Value> resourceName = origin.ResourceName();
   int lineNumber = fn->GetScriptLineNumber();
   int columnNumber = fn->GetScriptColumnNumber();
-  Local<Value> inferredName = fn->GetInferredName();
+  
+  Local<Value> inferredName = fn->GetDebugName();
 
   if (!resourceName.IsEmpty()) {
     target->Set(context, fileKey, resourceName).FromJust();

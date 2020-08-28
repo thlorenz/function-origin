@@ -19,7 +19,7 @@ test('\nOrigin of fixtures.TestFn', function(t) {
   t.equal(info.line, 2, 'line')
   t.equal(info.column, 15, 'column')
   t.equal(fixtures.TestFn.name, 'TestFn', 'name')
-  t.equal(info.inferredName, '', 'inferredName')
+  t.equal(info.inferredName, 'TestFn', 'inferredName')
 
   t.end()
 })
@@ -42,7 +42,7 @@ test('\nOrigin of boundFunction', function(t) {
   t.equal(info.file, fixturesPath, 'file')
   t.equal(info.line, 2, 'line')
   t.equal(info.column, 15, 'colunn')
-  t.equal(info.inferredName, '', 'inferredName')
+  t.equal(info.inferredName, 'TestFn', 'inferredName')
 
   t.end()
 })
@@ -53,16 +53,24 @@ test('\nOrigin of boundFunction', function(t) {
 const major = parseInt(process.versions.node.slice(0, 3))
 if (major >= 8) {
   test('\nOrigin of native functions returns empty', function(t) {
-    t.deepEqual(functionOrigin(Math.abs), EMPTY_ORIGIN_INFO, 'Math.abs')
-    t.deepEqual(functionOrigin(setOrigin), EMPTY_ORIGIN_INFO, 'setOrigin')
+    t.deepEqual(
+      functionOrigin(Math.abs),
+      Object.assign({}, EMPTY_ORIGIN_INFO, { inferredName: 'abs' }),
+      'Math.abs'
+    )
+    t.deepEqual(
+      functionOrigin(setOrigin),
+      Object.assign({}, EMPTY_ORIGIN_INFO, { inferredName: 'setOrigin' }),
+      'setOrigin'
+    )
     t.deepEqual(
       functionOrigin(Math.abs.bind(this)),
-      EMPTY_ORIGIN_INFO,
+      Object.assign({}, EMPTY_ORIGIN_INFO, { inferredName: 'abs' }),
       'Math.abs.bind(this)'
     )
     t.deepEqual(
       functionOrigin(Math.abs.bind(this, 1)),
-      EMPTY_ORIGIN_INFO,
+      Object.assign({}, EMPTY_ORIGIN_INFO, { inferredName: 'abs' }),
       'Math.abs.bind(this, 1)'
     )
 
