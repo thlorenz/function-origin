@@ -1,6 +1,6 @@
 {
   "name": "@thlorenz/function-origin",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Get origin of a function",
   "main": "dist/function-origin.js",
   "types": "dist/function-origin.d.ts",
